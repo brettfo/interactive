@@ -16,7 +16,17 @@ async function main() {
         const extensionTestsPath = path.resolve(__dirname, './suite/index');
 
         // Download VS Code, unzip it and run the integration test
-        await runTests({ extensionDevelopmentPath, extensionTestsPath });
+        await runTests({
+            extensionDevelopmentPath,
+            extensionTestsPath,
+            launchArgs: [
+                '--enable-proposed-api',
+                'ms-dotnettools.dotnet-interactive-vscode',
+                '--timeout',
+                '5000'
+            ],
+            version: 'insiders'
+        });
     } catch (err) {
         console.error('Failed to run tests');
         process.exit(1);
